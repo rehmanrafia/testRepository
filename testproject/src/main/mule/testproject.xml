@@ -10,6 +10,17 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	<flow name="testprojectFlow" doc:id="53e68856-a075-4714-b5f1-b06fa8ee2fda" >
 		<http:listener doc:name="Listener" doc:id="6423c16e-cb3b-4db8-90e6-7a992f49934a" config-ref="HTTP_Listener_config" path="/testProject"/>
 		<set-payload value="#[payload]" doc:name="Set Payload" doc:id="fa534b14-3c1d-4a91-a529-129ade9fd88b" />
+		<choice doc:name="Choice" doc:id="29c2b9f9-b381-4edc-8489-20f67d97af58" >
+			<when expression='#[payload.name=="chittoor"]'>
+				<logger level="INFO" doc:name="Chittoor Logger" doc:id="39f1c1ac-b526-40bb-be14-999afcec5a1e" message='#["Chittoor"]'/>
+			</when>
+			<when expression='#[payload.name=="MDPL"]'>
+				<logger level="INFO" doc:name="MDPL" doc:id="8317b83b-f920-4148-813c-b58958f1450e" message='#["Madanapalli"]'/>
+			</when>
+			<otherwise >
+				<logger level="INFO" doc:name="Logger" doc:id="edabc798-a9d5-4294-a003-2cb6bb4a0a5d" message='#["Banglore"]'/>
+			</otherwise>
+		</choice>
 		<logger level="INFO" doc:name="Logger" doc:id="83d3ed3d-2806-44f8-87ed-01acb615594b" message="#[payload]"/>
 	</flow>
 </mule>
